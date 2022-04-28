@@ -8,4 +8,3 @@ class Author(models.Model):
     last_name = models.CharField(max_length=64)
     birthday_year = models.PositiveIntegerField()
 
-

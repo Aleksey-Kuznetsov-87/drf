@@ -9,4 +9,3 @@ class Users(models.Model):
     lastname = models.CharField(max_length=64)
     email = models.CharField(unique=True, max_length=64)
 
-

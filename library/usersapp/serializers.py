@@ -6,3 +6,4 @@ class UserModelSerializer(HyperlinkedModelSerializer):
     class Meta:
         model = Users
         fields = '__all__'
+
