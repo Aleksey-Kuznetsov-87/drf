@@ -16,12 +16,19 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
+
+from footerapp.views import FooterViewSet
 from mainapp.views import AuthorViewSet
+from menuapp.views import MenuViewSet
+from usersapp.views import UserViewSet
 
 router = DefaultRouter()
 router.register('authors', AuthorViewSet)
+router.register('users', UserViewSet)
+router.register('footers', FooterViewSet)
+router.register('menus', MenuViewSet)
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
 ]
-

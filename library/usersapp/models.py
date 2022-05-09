@@ -8,4 +8,6 @@ class Users(models.Model):
     firstname = models.CharField(max_length=64)
     lastname = models.CharField(max_length=64)
     email = models.CharField(unique=True, max_length=64)
-
+    u_pass = models.CharField(max_length=64)
+#    пароль без шифрования, пока так
+#    а можно было и абстрактную модель джанги использовать
