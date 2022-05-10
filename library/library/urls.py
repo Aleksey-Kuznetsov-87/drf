@@ -18,15 +18,22 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
 from footerapp.views import FooterViewSet
-from mainapp.views import AuthorViewSet
+from mainapp.views import AuthorModelViewSet, BookModelViewSet, BiographyModelViewSet, ArticleModelViewSet
 from menuapp.views import MenuViewSet
+from todoapp.views import ProjectModelViewSet, TODOModelViewSet
 from usersapp.views import UserViewSet
 
 router = DefaultRouter()
-router.register('authors', AuthorViewSet)
+router.register('authors', AuthorModelViewSet)
+router.register('books', BookModelViewSet)
+router.register('biography', BiographyModelViewSet)
+router.register('article', ArticleModelViewSet)
+
 router.register('users', UserViewSet)
 router.register('footers', FooterViewSet)
 router.register('menus', MenuViewSet)
+router.register('project', ProjectModelViewSet)
+router.register('todo', TODOModelViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
