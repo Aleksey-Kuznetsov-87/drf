@@ -16,11 +16,38 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from mainapp.views import AuthorViewSet
+
+from footerapp.views import FooterViewSet
+from mainapp.views import AuthorModelViewSet, BookModelViewSet, BiographyModelViewSet, ArticleModelViewSet
+from menuapp.views import MenuViewSet
+from todoapp.views import TODOModelViewSet, ProjectLimitPaginatonViewSet, ProjectModelViewSet, \
+    ToDoLimitPaginatonListCreate
+from usersapp.views import UserViewSet, UsersList, UserDetail
 
 router = DefaultRouter()
-router.register('authors', AuthorViewSet)
+router.register('authors', AuthorModelViewSet)
+router.register('books', BookModelViewSet)
+router.register('biography', BiographyModelViewSet)
+router.register('article', ArticleModelViewSet)
+
+router.register('users', UserViewSet)
+router.register('footers', FooterViewSet)
+router.register('menus', MenuViewSet)
+router.register('project', ProjectLimitPaginatonViewSet)
+router.register('todo', TODOModelViewSet)
+
+# фильтры
+filter_router = DefaultRouter()
+filter_router.register('project', ProjectModelViewSet, basename='project')
+filter_router.register('todo', TODOModelViewSet, basename='todos')
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
+    path('filters/', include(filter_router.urls)),
+    path('users/', UsersList.as_view()),
+    path('user/<int:pk>/', UserDetail.as_view()),
+    path('todo/', ToDoLimitPaginatonListCreate.as_view()),
+    path('todo/<int:pk>/', TODOModelViewSet.as_view({'get': 'list'})),
 ]
