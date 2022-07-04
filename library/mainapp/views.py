@@ -5,7 +5,9 @@ from rest_framework.permissions import AllowAny
 from rest_framework.renderers import JSONRenderer, BrowsableAPIRenderer
 from rest_framework.viewsets import ModelViewSet
 from .models import Author, Book, Biography, Article
-from .serializers import AuthorModelSerializer, BookModelSerializer, BiographyModelSerializer, ArticleModelSerializer
+from .serializers import AuthorModelSerializer, BookModelSerializer, BiographyModelSerializer, ArticleModelSerializer, \
+    BookSerializerBase
+from .serializers import BookSerializerBase
 
 
 class AuthorModelViewSet(ModelViewSet):
@@ -14,9 +16,14 @@ class AuthorModelViewSet(ModelViewSet):
 
 
 class BookModelViewSet(ModelViewSet):
-    permission_classes = [permissions.IsAuthenticated]
+    # permission_classes = [permissions.IsAuthenticated]
     queryset = Book.objects.all()
     serializer_class = BookModelSerializer
+
+    def get_serializer_class(self):
+        if self.request.method in ['GET']:
+            return BookModelSerializer
+        return BookSerializerBase
 
 
 class BiographyModelViewSet(ModelViewSet):
