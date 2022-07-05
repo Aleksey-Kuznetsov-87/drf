@@ -1,3 +1,4 @@
+from rest_framework import serializers
 from rest_framework.serializers import HyperlinkedModelSerializer, ModelSerializer
 
 from .models import Author, Book, Article, Biography
@@ -28,6 +29,12 @@ class ArticleModelSerializer(ModelSerializer):
 class BookModelSerializer(HyperlinkedModelSerializer):
     authors = AuthorModelSerializer(many=True)
 
+    class Meta:
+        model = Book
+        fields = '__all__'
+
+
+class BookSerializerBase(serializers.ModelSerializer):
     class Meta:
         model = Book
         fields = '__all__'
