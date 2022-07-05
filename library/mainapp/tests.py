@@ -220,7 +220,7 @@ class TestUserViewSet(APITestCase):
         )
         response = self.client.put(f'/api/article/{article.id}/',
                                    {
-                                       'text': 'неизвестные факты',
+                                       'name': 'неизвестные факты',
                                        'authors': article.authors.uid
                                    })
         self.assertEqual(response.status_code, status.HTTP_200_OK)
