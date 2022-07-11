@@ -6,13 +6,18 @@ from rest_framework.renderers import JSONRenderer, BrowsableAPIRenderer
 from rest_framework.viewsets import ModelViewSet
 from .models import Author, Book, Biography, Article
 from .serializers import AuthorModelSerializer, BookModelSerializer, BiographyModelSerializer, ArticleModelSerializer, \
-    BookSerializerBase
+    BookSerializerBase, AuthorSerializerBase
 from .serializers import BookSerializerBase
 
 
 class AuthorModelViewSet(ModelViewSet):
     queryset = Author.objects.all()
     serializer_class = AuthorModelSerializer
+
+    def get_serializer_class(self):
+        if self.request.version == '2.0':
+            return AuthorSerializerBase
+        return AuthorModelSerializer
 
 
 class BookModelViewSet(ModelViewSet):
