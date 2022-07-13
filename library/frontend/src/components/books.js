@@ -1,22 +1,22 @@
 import React from 'react'
 
-const BookItem = ({item}) => {
+const BookItem = ({book}) => {
     return (
         <tr align="left">
             <td>
-                {item.id}
+                {book.uid}
             </td>
             <td>
-                {item.name}
+                {book.name}
             </td>
             <td>
-                {item.author.first_name} {item.author.last_name}
+                {book.authors.first_name}
             </td>
         </tr>
     )
 }
 
-const BookList = ({items}) => {
+const BookList = ({books}) => {
     return (
         <table cellSpacing="8">
             <th align="left">
@@ -28,7 +28,7 @@ const BookList = ({items}) => {
             <th align="left">
                 Имя автора
             </th>
-            {items.map((item) => <BookItem item={item}/>)}
+            {books.map((book) => <BookItem book={book}/>)}
         </table>
     )
 }
