@@ -1,41 +1,44 @@
 import React from 'react'
+import {Link} from "react-router-dom";
 
-const ToDoItem = ({ToDo}) => {
+const ToDoItem = ({ToDo, deleteTodo}) => {
     return (
         <tr>
             <td>
-                {ToDo.username}
+                {ToDo.update_at}
             </td>
             <td>
-                {ToDo.firstname}
+                {ToDo.created_by}
+            </td><br></br>
+            <td>
+                {ToDo.text}
             </td>
             <td>
-                {ToDo.lastname}
-            </td>
-            <td>
-                {ToDo.email}
+                <button onClick={()=>deleteTodo(ToDo.uid)} type={"button"}>
+                    Delete
+                </button>
             </td>
         </tr>
     )
 }
 
-const ToDosList = ({ToDos}) => {
+const ToDosList = ({ToDos, deleteTodo}) => {
     return (
-        <table>
-            <th>
-                username
-            </th>
-            <th>
-                firstname
-            </th>
-            <th>
-                lastname
-            </th>
-            <th>
-                email
-            </th>
-            {ToDos.map((ToDo) => <ToDoItem ToDo={ToDo}/>)}
-        </table>
+        <div>
+            <table>
+                <th>
+                    Дата создания
+                </th>
+                <th>
+                    Имя создателя
+                </th><br></br>
+                <th>
+                    Текст
+                </th>
+                {ToDos.map((ToDo) => <ToDoItem ToDo={ToDo} deleteTodo={deleteTodo}/>)}
+            </table>
+            <Link to='/ToDos/create'>Создать проект</Link>
+    </div>
     )
 }
 

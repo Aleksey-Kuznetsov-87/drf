@@ -10,5 +10,7 @@ class Users(models.Model):
     lastname = models.CharField(max_length=64)
     email = models.EmailField(verbose_name='email', unique=True)
     u_pass = models.CharField(max_length=64)
+    is_superuser = models.BooleanField(null=False, default=False)
+    is_staff = models.BooleanField(null=False, default=False)
 #    пароль без шифрования, пока так
-#    а можно было и абстрактную модель джанги использовать
+

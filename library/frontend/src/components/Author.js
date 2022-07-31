@@ -5,7 +5,7 @@ const AuthorItem = ({author}) => {
     return (
         <tr align="left">
             <td>
-                <Link to={`author/${author.id}`}> {author.id} </Link>
+                <Link to={`author/${author.uid}`}> {author.uid} </Link>
             </td>
             <td>
                 {author.last_name} {author.first_name}
@@ -21,7 +21,7 @@ const AuthorList = ({authors}) => {
     return (
         <table cellSpacing="8">
             <th align="left">
-                ID
+                UID
             </th>
             <th align="left">
                 Имя

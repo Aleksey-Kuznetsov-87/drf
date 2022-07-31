@@ -1,11 +1,11 @@
 from django.http import Http404
-from rest_framework import status
+from rest_framework import status, generics
 from rest_framework.renderers import JSONRenderer, BrowsableAPIRenderer
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
 from .models import Users
-from .serializers import UserModelSerializer
+from .serializers import UserModelSerializer, UserSerializerWithFullName, UserSerializerWithFullNameNew
 
 
 class UserViewSet(ModelViewSet):
@@ -45,3 +45,12 @@ class UserDetail(APIView):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+class UserListAPIView(generics.ListAPIView):
+    queryset = Users.objects.all()
+    serializer_class = UserModelSerializer
+
+    def get_serializer_class(self):
+        if self.request.version == '0.2':
+            return UserSerializerWithFullNameNew    # отсылка к новому сериализатору.('is_superuser','is_staff',)
+        return UserModelSerializer    # а вот этот сериализатор старый, без ('is_superuser','is_staff',)
