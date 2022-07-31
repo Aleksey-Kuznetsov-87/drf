@@ -7,7 +7,6 @@ from .models import Author, Book, Article, Biography
 class AuthorModelSerializer(ModelSerializer):
     class Meta:
         model = Author
-        # fields = ['first_name']
         fields = '__all__'
         # exclude = ['uid']
 
@@ -34,7 +33,7 @@ class ArticleModelSerializer(ModelSerializer):
         fields = '__all__'
 
 
-class BookModelSerializer(HyperlinkedModelSerializer):
+class BookModelSerializer(ModelSerializer):    # было HyperlinkedModelSerializer
     authors = AuthorModelSerializer(many=True)
 
     class Meta:

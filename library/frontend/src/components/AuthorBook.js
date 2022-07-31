@@ -7,14 +7,14 @@ const AuthorBookItem = ({item}) => {
         <tr align="left">
             <td>{item.id}</td>
             <td>{item.name}</td>
-            <td>{item.author.last_name} {item.author.first_name}</td>
+            <td>{item.authors[0]?.last_name} {item.authors[0]?.first_name}</td>
         </tr>
     )
 }
 
 const AuthorBookList = ({items}) => {
-    let {id} = useParams();
-    let filtered_items = items.filter((item) => item.author.id == id)
+    let {uid} = useParams();
+    let filtered_items = items.filter((item) => item.authors[0]?.uid === uid)
     return (
         <table cellspacing="8">
             <tr align="left">
