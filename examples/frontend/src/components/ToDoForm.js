@@ -1,10 +1,9 @@
 import React from 'react'
 
-class ProjectForm extends React.Component {
+class createTodo extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {name: '', user: props.users[0]?.uid}    // [0] - надо. ? - оператор опциональной
-        // последовательности. Без него не взлетит
+        this.state = {name: '', created_by: props.users[0]?.uid, project: ''}
     }
 
     handleChange(event) {
@@ -16,9 +15,10 @@ class ProjectForm extends React.Component {
     }
 
     handleSubmit(event) {
-        this.props.createProject(this.state.name, this.state.user)
+        this.props.createTodo(this.state.name, this.state.created_by, this.state.project)
         // console.log(this.state.name)
-        // console.log(this.state.user)
+        // console.log(this.state.created_by)
+        // console.log(this.state.project)
         event.preventDefault()
     }
 
@@ -26,25 +26,34 @@ class ProjectForm extends React.Component {
         return (
             <form onSubmit={(event) => this.handleSubmit(event)}>
                 <div className="form-group">
-                    <label form="name">Имя проекта</label>
+                    <label For="name"></label>
                     <input type="text" className="form-control" name="name"
                            value={this.state.name} onChange={(event) => this.handleChange(event)}/>
                 </div>
                 <div className="form-group">
-                    <label form="user">user</label>
+                    <label For="created_by">Имя создателя: </label>
                     {/*<input type="number" className="form-control" name="author"*/}
                     {/*       value={this.state.authors} onChange={(event) => this.handleChange(event)}/>*/}
-                    <select name="user" className='form-control' onChange={(event) => this.handleChange(event)}>
+                    <select name="created_by" className='form-control' onChange={(event) => this.handleChange(event)}>
                         {this.props.users.map((item) =>
                             <option value={item.uid}>
                                 {item.username}
                             </option>)}
                     </select>
                 </div>
-                <input type="submit" className="btn btn-primary" value="Save"/>
+                <div className="form-group">
+                    <label For="project">Имя проекта: </label>
+                    <select name="project" className='form-control' onChange={(event) => this.handleChange(event)}>
+                        {this.props.projects.map((item) =>
+                            <option value={item.uid}>
+                                {item.name_project}
+                            </option>)}
+                    </select>
+                </div>
+                    <input type="submit" className="btn btn-primary" value="Save"/>
             </form>
         );
     }
 }
 
-export default ProjectForm
+export default createTodo
