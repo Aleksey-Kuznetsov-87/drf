@@ -1,14 +1,16 @@
 import React from 'react'
 import {Link} from "react-router-dom";
 
-const ToDoItem = ({ToDo, deleteTodo}) => {
+const ToDoItem = ({ToDo, deleteTodo, user}) => {
+    let obj = user.find(o => o.uid === ToDo.created_by)
+    console.log(ToDo.created_by)
     return (
         <tr>
             <td>
                 {ToDo.update_at}
             </td>
             <td>
-                {ToDo.created_by}
+                {obj.username}
             </td><br></br>
             <td>
                 {ToDo.text}
@@ -22,7 +24,7 @@ const ToDoItem = ({ToDo, deleteTodo}) => {
     )
 }
 
-const ToDosList = ({ToDos, deleteTodo}) => {
+const ToDosList = ({ToDos, deleteTodo, users}) => {
     return (
         <div>
             <table>
@@ -35,7 +37,7 @@ const ToDosList = ({ToDos, deleteTodo}) => {
                 <th>
                     Текст
                 </th>
-                {ToDos.map((ToDo) => <ToDoItem ToDo={ToDo} deleteTodo={deleteTodo}/>)}
+                {ToDos.map((ToDo) => <ToDoItem ToDo={ToDo} deleteTodo={deleteTodo} user={users}/>)}
             </table>
             <Link to='/ToDos/create'>Создать проект</Link>
     </div>

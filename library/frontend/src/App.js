@@ -263,6 +263,7 @@ class App extends React.Component {
 
 
                         <Route exact path='/ToDos' component={() => <ToDosList ToDos={this.state.ToDos}
+                                                                               users={this.state.users}
                                                                                deleteTodo={(uid) =>
                                                                                    this.deleteTodo(uid)}/>}/>
                         <Route exact path='/ToDos/create' component={() =>
